@@ -85,21 +85,40 @@ exports.filterRecords = async (req, res) => {
 
     let condition = {};
 
+    const trimmedValue = value.trim();
+
+    const isNumeric = !isNaN(value) && value !== '';
+
     switch (operator) {
       case 'contains':
         condition[field] = { $regex: value, $options: 'i' };
         break;
       case 'equals':
-        condition[field] = value;
+        condition[field] = isNumeric ? Number(value) : value;
         break;
       case 'starts_with':
         condition[field] = { $regex: '^' + value, $options: 'i' };
         break;
       case 'ends_with':
-        condition[field] = { $regex: value + '$', $options: 'i' };
+        const escapedValue = trimmedValue.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, '\\$&');
+        condition[field] = { $regex: escapedValue + '\\s*$', $options: 'i' };
         break;
       case 'is_empty':
         condition[field] = { $in: [null, ''] };
+        break;
+      case 'greater_than':
+        if (isNumeric) {
+          condition[field] = { $gt: Number(value) };
+        } else {
+          return res.status(400).json({ message: 'Greater than operator can only be used with numeric values' });
+        }
+        break;
+      case 'less_than':
+        if (isNumeric) {
+          condition[field] = { $lt: Number(value) };
+        } else {
+          return res.status(400).json({ message: 'Less than operator can only be used with numeric values' });
+        }
         break;
       default:
         return res.status(400).json({ message: 'Invalid filter operator' });
@@ -112,6 +131,7 @@ exports.filterRecords = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 
