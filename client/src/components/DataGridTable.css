@@ -1,0 +1,63 @@
+.ag-theme-alpine {
+  --ag-font-size: 14px;
+  --ag-font-family: 'Inter', sans-serif;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.ag-cell {
+  padding: 14px 12px !important; 
+  line-height: 1.4;
+  overflow: visible;
+}
+
+.ag-header-cell-label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ag-row {
+  align-items: center;
+}
+
+.ag-header-row {
+  height: 52px !important; 
+  line-height: 52px;
+}
+
+.ag-paging-panel {
+  height: 52px !important;
+  font-size: 14px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+flex-wrap: wrap;}
+
+.ag-theme-alpine .ag-header {
+  background-color: #f3f4f6 !important; 
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  background-color: transparent !important; 
+}
+
+.ag-header-cell-menu-button {
+  display: none !important;
+}
+
+.ag-tooltip {
+  background-color: #333 !important; 
+  color: #fff !important;          
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  max-width: 300px;
+  white-space: normal;
+}
+
+
+
